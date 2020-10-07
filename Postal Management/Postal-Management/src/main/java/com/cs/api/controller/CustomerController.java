@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cs.api.model.Customer;
+import com.cs.api.entity.Customer;
 import com.cs.api.response.CustomerResponse;
 import com.cs.api.service.CustomerService;
 

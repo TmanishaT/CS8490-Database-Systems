@@ -2,7 +2,7 @@ package com.cs.api.service;
 
 import java.util.List;
 
-import com.cs.api.model.Customer;
+import com.cs.api.entity.Customer;
 import com.cs.api.response.CustomerResponse;
 
 public interface CustomerService {
