@@ -24,7 +24,7 @@ public class Employee {
 	@Column(name = "ID")
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
+	private Integer id;//change it to ssn
 
 	@Column(name = "employee_name", nullable = false, length = 255)
 	private String name;

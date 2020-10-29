@@ -1,5 +1,7 @@
 package com.cs.api.entity;
 
+import java.sql.Date;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -34,6 +36,15 @@ public class Transaction {
 	private ItemType itemType;
 
 	private String weight;
+	
+	private Date startDate;
+	
+	private Date deliveryDate;
+	
+	private double charges;
+	
+	@Enumerated(EnumType.STRING)
+	private Delivery deliveryType;
 
 	@Enumerated(EnumType.STRING)
 	// @Column(length = 10)
@@ -46,6 +57,46 @@ public class Transaction {
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "manager_id", nullable = false)
 	private Employee performedBy;
+
+	public Delivery getDeliveryType() {
+		return deliveryType;
+	}
+
+	public void setDeliveryType(Delivery deliveryType) {
+		this.deliveryType = deliveryType;
+	}
+
+	public Date getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+
+	public Date getDeliveryDate() {
+		return deliveryDate;
+	}
+
+	public void setDeliveryDate(Date deliveryDate) {
+		this.deliveryDate = deliveryDate;
+	}
+
+	public double getCharges() {
+		return charges;
+	}
+
+	public void setCharges(double charges) {
+		this.charges = charges;
+	}
+
+	public Employee getPerformedBy() {
+		return performedBy;
+	}
+
+	public void setPerformedBy(Employee performedBy) {
+		this.performedBy = performedBy;
+	}
 
 	public Store getStore() {
 		return store;
