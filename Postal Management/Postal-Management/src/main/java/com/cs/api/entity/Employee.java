@@ -8,8 +8,6 @@ import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
@@ -23,8 +21,7 @@ import javax.persistence.Table;
 public class Employee {
 	@Column(name = "ID")
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;//change it to ssn
+	private String SSN;//change it to ssn
 
 	@Column(name = "employee_name", nullable = false, length = 255)
 	private String name;
@@ -48,6 +45,15 @@ public class Employee {
 	@CollectionTable(name = "employee_phone_numbers", joinColumns = @JoinColumn(name = "employee_id"))
 	@Column(name = "phone_number")
 	private Set<String> phoneNumbers = new HashSet<>();
+
+	
+	public String getSSN() {
+		return SSN;
+	}
+
+	public void setSSN(String sSN) {
+		SSN = sSN;
+	}
 
 	public String getName() {
 		return name;
