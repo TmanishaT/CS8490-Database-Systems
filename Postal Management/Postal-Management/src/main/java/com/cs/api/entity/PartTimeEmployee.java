@@ -1,6 +1,5 @@
 package com.cs.api.entity;
 
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 @Entity

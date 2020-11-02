@@ -19,9 +19,9 @@ import javax.persistence.Table;
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "EMPLOYEE_TYPE")
 public class Employee {
-	@Column(name = "ID")
+	@Column(name = "SSN")
 	@Id
-	private String SSN;//change it to ssn
+	private Long SSN;
 
 	@Column(name = "employee_name", nullable = false, length = 255)
 	private String name;
@@ -46,12 +46,12 @@ public class Employee {
 	@Column(name = "phone_number")
 	private Set<String> phoneNumbers = new HashSet<>();
 
-	
-	public String getSSN() {
+
+	public Long getSSN() {
 		return SSN;
 	}
 
-	public void setSSN(String sSN) {
+	public void setSSN(Long sSN) {
 		SSN = sSN;
 	}
 

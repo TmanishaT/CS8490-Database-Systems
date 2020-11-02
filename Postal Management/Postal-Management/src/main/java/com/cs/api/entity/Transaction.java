@@ -41,7 +41,7 @@ public class Transaction {
 	
 	private Date deliveryDate;
 	
-	private double charges;
+	private double charges;//charges calculation logic needs to be done--not considering miles as of now
 	
 	@Enumerated(EnumType.STRING)
 	private Delivery deliveryType;

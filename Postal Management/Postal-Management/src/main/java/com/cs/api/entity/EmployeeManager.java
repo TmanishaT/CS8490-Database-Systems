@@ -27,11 +27,11 @@ public class EmployeeManager {
 	private Integer id;
 
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "manager_id", referencedColumnName = "ID")
+	@JoinColumn(name = "manager_id", referencedColumnName = "SSN")
 	private Employee manager;
 
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "employee_id", referencedColumnName = "ID")
+	@JoinColumn(name = "employee_id", referencedColumnName = "SSN")
 	private Employee employee;
 
 	public Employee getManager() {

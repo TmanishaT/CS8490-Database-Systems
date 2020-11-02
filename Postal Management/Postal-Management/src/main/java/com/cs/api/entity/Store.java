@@ -16,7 +16,7 @@ public class Store {
 	private Integer id;
 
 	
-	@Column(name = "store_name", nullable = false, length = 255)
+	@Column(name = "name", nullable = false, length = 255)
 	private String name;
 	
 	private String addreessLine;
