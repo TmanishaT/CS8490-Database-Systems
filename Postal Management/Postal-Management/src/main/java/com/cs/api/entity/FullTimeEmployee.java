@@ -1,9 +1,10 @@
 package com.cs.api.entity;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 @Entity
-//@DiscriminatorValue("F")
+@DiscriminatorValue("F")
 public class FullTimeEmployee extends Employee{
 	private int salary;
 

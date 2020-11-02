@@ -13,9 +13,9 @@ import javax.persistence.Table;
 
 import com.cs.api.entity.Employee;
 
-@Entity
-@Table(name = "employee_manager")
-public class EmployeeManager {
+//@Entity
+//@Table(name = "employee_manager")
+public class EmployeeManager {/*
 
 	@Column(name = "ID")
 	@Id
@@ -63,4 +63,4 @@ public class EmployeeManager {
 		this.id = id;
 	}
 
-}
+*/}
