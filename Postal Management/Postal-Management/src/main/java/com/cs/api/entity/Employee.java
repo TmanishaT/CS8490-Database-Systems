@@ -165,4 +165,13 @@ public class Employee {
 		// TODO Auto-generated constructor stub
 	}
 
+	public Store getStore() {
+		return store;
+	}
+
+	public void setStore(Store store) {
+		this.store = store;
+	}
+
+	
 }
