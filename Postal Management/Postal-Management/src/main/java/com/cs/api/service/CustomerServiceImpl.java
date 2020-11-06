@@ -56,4 +56,16 @@ public class CustomerServiceImpl implements CustomerService {
 	
 	}
 
+	@Override
+	public List<Customer> findByState(String state) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Customer> findByZip(Integer zip) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

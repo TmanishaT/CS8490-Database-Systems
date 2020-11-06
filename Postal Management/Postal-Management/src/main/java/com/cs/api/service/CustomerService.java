@@ -11,4 +11,6 @@ public interface CustomerService {
 	public CustomerResponse findById(Integer id);
 	public CustomerResponse findByName(String name);
 	public Customer saveCustomer(Customer customer);
-}
+	public List<Customer> findByState(String state);
+	public List<Customer> findByZip(Integer zip);
+	}
