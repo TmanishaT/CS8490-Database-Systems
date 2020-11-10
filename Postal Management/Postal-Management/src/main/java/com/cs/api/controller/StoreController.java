@@ -82,7 +82,7 @@ public class StoreController {
 		_store.setState(store.getState());
 		_store.setZipCode(store.getZipCode());
 		_store.setCountry(store.getCountry());
-		return new ResponseEntity<>(storeService.insertStore(_store), HttpStatus.OK);
+		return new ResponseEntity<>((_store), HttpStatus.OK);
 
 	}
 
@@ -90,7 +90,7 @@ public class StoreController {
 	public ResponseEntity<HttpStatus> deleteStore(@PathVariable("id") int id) {
 		try {
 			storeService.deleteById(id);
-			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+			return new ResponseEntity<>(HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}

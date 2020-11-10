@@ -10,11 +10,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "customer")
+@Table(name = "customer",indexes = {
+		@Index( name = "customer_name_idx", columnList = "name")
+		})
 public class Customer {
 
 	@Column(name = "ID")
@@ -26,7 +29,7 @@ public class Customer {
 	// allocationSize=1)
 	private Integer id;
 
-	@Column(name = "customer_name", nullable = false, length = 255)
+	@Column(nullable = false, length = 255)
 	private String name;
 
 	@ElementCollection

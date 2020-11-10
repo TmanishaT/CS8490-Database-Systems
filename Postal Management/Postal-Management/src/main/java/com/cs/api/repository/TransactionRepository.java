@@ -12,10 +12,10 @@ import com.cs.api.entity.Transaction;
 
 @Repository
 public interface TransactionRepository extends JpaRepository<Transaction, Integer>{
-	@Query("SELECT t FROM Transaction t WHERE t.sender_id=:senderId")
+	@Query("SELECT t FROM Transaction t WHERE t.sender=:senderId")
 	public List<Transaction> findAllBySenderId(@Param("senderId") Integer senderId);
 	
-	@Query("SELECT t FROM Transaction t WHERE t.receiver_id=:receiverId")
+	@Query("SELECT t FROM Transaction t WHERE t.receiver=:receiverId")
 	public List<Transaction> findAllByReceiverId(@Param("receiverId") Integer receiverId);
 
 	@Query("SELECT t FROM Transaction t WHERE t.itemType=:itemType")
@@ -30,10 +30,10 @@ public interface TransactionRepository extends JpaRepository<Transaction, Intege
 	@Query("SELECT t FROM Transaction t WHERE t.deliveryType=:deliveryType")
 	public List<Transaction> findAllByDeliveryType(@Param("deliveryType") String deliveryType);
 	
-	@Query("SELECT t FROM Transaction t WHERE t.itemCategory=:itemCategory")
+	@Query("SELECT t FROM Transaction t WHERE t.category=:itemCategory")
 	public List<Transaction> findAllByItemCategory(@Param("itemCategory") String itemCategory);
 	
-	@Query("SELECT t FROM Transaction t WHERE t.storeId=:storeId")
+	@Query("SELECT t FROM Transaction t WHERE t.store=:storeId")
 	public List<Transaction> findAllByStoreId(@Param("storeId") Integer storeId);
 	
 	@Query("SELECT t FROM Transaction t WHERE t.performedBy=:performedBy")

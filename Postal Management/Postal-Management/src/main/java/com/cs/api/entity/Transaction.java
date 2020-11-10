@@ -25,11 +25,11 @@ public class Transaction {
 	private Integer id;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "sender_id", nullable = false)
+	@JoinColumn(name = "sender", nullable = false)
 	private Customer sender;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "receiver_id", nullable = false)
+	@JoinColumn(name = "receiver", nullable = false)
 	private Customer receiver;
 
 	@Enumerated(EnumType.STRING)
@@ -51,11 +51,11 @@ public class Transaction {
 	private ItemCategory category;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "store_id", nullable = false)
+	@JoinColumn(name = "store", nullable = false)
 	private Store store;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "manager_id", nullable = false)
+	@JoinColumn(name = "performedBy", nullable = false)
 	private Employee performedBy;
 
 	public Delivery getDeliveryType() {
