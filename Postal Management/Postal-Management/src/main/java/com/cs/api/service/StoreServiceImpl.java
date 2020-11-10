@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -57,6 +59,23 @@ public class StoreServiceImpl implements StoreService {
 	public void deleteById(Integer id) {
 		if(id!=null)
 		storeRepository.deleteById(id);
+	}
+
+	@Override
+	public Store updateStore(int id, Store store) {
+		//it will be updated auto as it will be present in persistent contxt
+		Store _store = findById(id);
+		if(store!=null){
+			if (!store.getName().isEmpty())
+				_store.setName(store.getName());// name is not nullable
+			
+			_store.setAddreessLine(store.getAddreessLine());
+			_store.setCity(store.getCity());
+			_store.setState(store.getState());
+			_store.setZipCode(store.getZipCode());
+			_store.setCountry(store.getCountry());
+		}
+		return _store;
 	}
 
 }

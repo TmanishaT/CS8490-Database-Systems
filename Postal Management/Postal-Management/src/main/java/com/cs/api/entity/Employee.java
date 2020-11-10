@@ -31,7 +31,7 @@ public class Employee {
 	@Id
 	private Long SSN;
 
-	@Column(name = "employee_name", nullable = false, length = 255)
+	@Column(name = "name", nullable = false, length = 255)
 	private String name;
 
 	@ElementCollection
@@ -48,9 +48,11 @@ public class Employee {
 	private String zipCode;
 
 	private String country;
+	
+	private int salary;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "store_id")
+	@JoinColumn(name = "store")
 	private Store store;
 
 	@ElementCollection
@@ -71,6 +73,15 @@ public class Employee {
 																// arrays.objects
 	@OneToMany(mappedBy = "manager")
 	private Set<Employee> subordinates = new HashSet<Employee>();
+
+	
+	public int getSalary() {
+		return salary;
+	}
+
+	public void setSalary(int salary) {
+		this.salary = salary;
+	}
 
 	public Employee getManager() {
 		return manager;

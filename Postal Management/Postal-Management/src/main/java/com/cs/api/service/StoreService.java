@@ -11,6 +11,7 @@ public interface StoreService {
 	public Store findByName(String storeName);
 	public List<Store> findAll();
 	public void deleteById(Integer id);
+	public Store updateStore(int id, Store store);
 	
 
 }

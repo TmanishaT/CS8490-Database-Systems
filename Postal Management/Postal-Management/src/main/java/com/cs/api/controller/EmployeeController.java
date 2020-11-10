@@ -11,14 +11,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.cs.api.entity.Store;
 import com.cs.api.service.StoreService;
 
-@RestController
-@RequestMapping("/store")
-public class StoreController {
+public class EmployeeController {
 
 	@Autowired
 	StoreService storeService;
@@ -70,9 +67,18 @@ public class StoreController {
 
 	@RequestMapping(value = "/stores/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Store> updateStore(@PathVariable("id") int id, @RequestBody Store store) {
-		Store _store = storeService.updateStore(id, store);
+		Store _store = storeService.findById(id);
 		if (_store == null)
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+		if (!store.getName().isEmpty())
+			_store.setName(store.getName());// name is not nullable
+
+		_store.setAddreessLine(store.getAddreessLine());
+		_store.setCity(store.getCity());
+		_store.setState(store.getState());
+		_store.setZipCode(store.getZipCode());
+		_store.setCountry(store.getCountry());
 		return new ResponseEntity<>((_store), HttpStatus.OK);
 
 	}
