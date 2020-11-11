@@ -11,42 +11,45 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-import com.cs.api.entity.Store;
-import com.cs.api.service.StoreService;
+import com.cs.api.entity.Employee;
+import com.cs.api.service.EmployeeService;
 
+@RestController
+@RequestMapping("/api/employee")
 public class EmployeeController {
 
 	@Autowired
-	StoreService storeService;
+	EmployeeService employeeService;
 
-	@RequestMapping("/stores")
-	public ResponseEntity<List<Store>> getAllStores(@RequestParam(required = false) String name) {
+	@RequestMapping("/employees")
+	public ResponseEntity<List<Employee>> getAllEmployee(@RequestParam(required = false) String name) {
 		try {
-			List<Store> stores = new ArrayList<Store>();
+			List<Employee> emps = new ArrayList<Employee>();
 
 			if (name == null)
-				stores = storeService.findAll();
+				emps = employeeService.findAll();
 			else {
 
-				Store store = storeService.findByName(name);
-				if (store != null)
-					stores.add(store);
+				Employee emp = employeeService.findByName(name);
+				if (emp != null)
+					emps.add(emp);
 			}
 
-			if (stores.isEmpty()) {
+			if (emps.isEmpty()) {
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 			}
 
-			return new ResponseEntity<>(stores, HttpStatus.OK);
+			return new ResponseEntity<>(emps, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
-	@RequestMapping("/stores/{id}")
-	public ResponseEntity<Store> getStoreById(@PathVariable("id") int id) {
-		Store storeData = storeService.findById(id);
+	@RequestMapping("/employees/{id}")
+	public ResponseEntity<Employee> getEmployeeById(@PathVariable("id") Long ssn) {
+		Employee storeData = employeeService.findBySSN(ssn);
 
 		if (storeData != null) {
 			return new ResponseEntity<>(storeData, HttpStatus.OK);
@@ -55,41 +58,44 @@ public class EmployeeController {
 		}
 	}
 
-	@RequestMapping(value = "/stores", method = RequestMethod.POST)
-	public ResponseEntity<Store> createStore(@RequestBody Store store) {
+	@RequestMapping(value = "/employee", method = RequestMethod.POST)
+	public ResponseEntity<Employee> createEmployee(@RequestBody Employee employee) {
 		try {
-			Store _store = storeService.insertStore(store);
-			return new ResponseEntity<>(_store, HttpStatus.CREATED);
+			Employee _emp = employeeService.insert(employee);
+			return new ResponseEntity<>(_emp, HttpStatus.CREATED);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
-	@RequestMapping(value = "/stores/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Store> updateStore(@PathVariable("id") int id, @RequestBody Store store) {
-		Store _store = storeService.findById(id);
-		if (_store == null)
+	@RequestMapping(value = "/employees/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<Employee> updateEmployee(@PathVariable("id") Long ssn, @RequestBody Employee employee) {
+		Employee _emp = employeeService.updateEmployee(ssn, employee);
+		if (_emp == null)
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
-		if (!store.getName().isEmpty())
-			_store.setName(store.getName());// name is not nullable
-
-		_store.setAddreessLine(store.getAddreessLine());
-		_store.setCity(store.getCity());
-		_store.setState(store.getState());
-		_store.setZipCode(store.getZipCode());
-		_store.setCountry(store.getCountry());
-		return new ResponseEntity<>((_store), HttpStatus.OK);
+		return new ResponseEntity<>((_emp), HttpStatus.OK);
 
 	}
 
-	@RequestMapping(value = "/stores/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<HttpStatus> deleteStore(@PathVariable("id") int id) {
+	@RequestMapping(value = "/employees/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<HttpStatus> deleteEmployee(@PathVariable("id") Long ssn) {
 		try {
-			storeService.deleteById(id);
+			employeeService.deleteBySSN(ssn);
 			return new ResponseEntity<>(HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	
+	@RequestMapping(value = "/employees/assignManager/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<Employee> assignEmployeeManager(@PathVariable("id") Long ssn, @RequestBody Employee employee) {
+		Employee _emp = employeeService.updateEmployee(ssn, employee);
+		if (_emp == null)
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+		return new ResponseEntity<>((_emp), HttpStatus.OK);
+
+	}
+	
 }

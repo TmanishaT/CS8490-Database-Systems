@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 import com.cs.api.entity.Employee;
@@ -52,12 +53,32 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	}
 
-	/*
-	 * @Override public void assignManager(Integer empployeeId, Integer
-	 * managerId) {
-	 * 
-	 * }
-	 */
+	@Override
+	public boolean assignManager(Long employeeId, Long managerId) {
+		if (employeeId != null && managerId != null) {
+			Employee emp = findBySSN(employeeId);
+			Employee manager = findBySSN(managerId);
+			if (emp != null && manager != null) {
+				emp.setManager(manager);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public boolean assignEmployeesToManager(List<Long> employeeIds, Long managerId) {
+		if (!CollectionUtils.isEmpty(employeeIds) && managerId != null) {
+			List<Employee> empList = employeeRepository.findBySSNList(employeeIds);
+			Employee manager = findBySSN(managerId);
+			if (CollectionUtils.isEmpty(empList) && manager != null) {
+				empList.forEach(p -> p.setManager(manager));
+				return true;
+			}
+		}
+		return false;
+	}
+
 	@Override
 	public Employee insert(Employee employee) {
 		Employee _employee = new Employee();
@@ -75,4 +96,24 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return employeeRepository.save(_employee);
 	}
 
+	@Override
+	public Employee updateEmployee(Long ssn, Employee employee) {
+		// it will be updated auto as it will be present in persistent contxt
+		Employee _emp = findBySSN(ssn);
+		if (_emp != null) {
+			if (!employee.getName().isEmpty())
+				_emp.setName(employee.getName());// name is not nullable
+
+			_emp.setAddreessLine(employee.getAddreessLine());
+			_emp.setCity(employee.getCity());
+			_emp.setState(employee.getState());
+			_emp.setZipCode(employee.getZipCode());
+			_emp.setCountry(employee.getCountry());
+			_emp.setSalary(employee.getSalary());
+			_emp.setEmails(new HashSet<String>(employee.getEmails()));
+			_emp.setPhoneNumbers(new HashSet<Integer>(employee.getPhoneNumbers()));
+
+		}
+		return _emp;
+	}
 }

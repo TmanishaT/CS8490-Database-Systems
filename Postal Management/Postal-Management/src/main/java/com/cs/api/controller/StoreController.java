@@ -17,7 +17,7 @@ import com.cs.api.entity.Store;
 import com.cs.api.service.StoreService;
 
 @RestController
-@RequestMapping("/store")
+@RequestMapping("/api/store")
 public class StoreController {
 
 	@Autowired
